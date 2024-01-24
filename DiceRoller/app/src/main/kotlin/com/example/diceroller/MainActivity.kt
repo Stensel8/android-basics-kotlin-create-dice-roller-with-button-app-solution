@@ -16,9 +16,8 @@
 package com.example.diceroller
 
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.diceroller.databinding.ActivityMainBinding
 
 /**
  * This activity allows the user to roll a dice and view the result
@@ -26,18 +25,19 @@ import androidx.appcompat.app.AppCompatActivity
  */
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var binding: ActivityMainBinding
+
     /**
      * This method is called when the Activity is created.
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        // Find the Button in the layout
-        val rollButton: Button = findViewById(R.id.button)
 
         // Set a click listener on the button to roll the dice when the user taps the button
-        rollButton.setOnClickListener { rollDice() }
+        binding.button.setOnClickListener { rollDice() }
     }
 
     /**
@@ -49,8 +49,7 @@ class MainActivity : AppCompatActivity() {
         val diceRoll = dice.roll()
 
         // Update the screen with the dice roll
-        val resultTextView: TextView = findViewById(R.id.textView)
-        resultTextView.text = diceRoll.toString()
+        binding.textView.text = diceRoll.toString()
     }
 }
 
